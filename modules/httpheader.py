@@ -18,6 +18,7 @@ def run_command(args):
     present_headers: dict[str, str] = {}
     missing_headers: dict[str, str] = {}
 
+    print(f"[*] Starting HTTP Header scan on target {args.target}")
     start = time.time()
 
     try:
@@ -73,6 +74,7 @@ def run_command(args):
                         f.write(f"Server: {server_header}\n")
                     if powered_by:
                         f.write(f"X-Powered-By: {powered_by}\n")
+            print(f"[*] Output saved to {args.output}")
 
         except OSError as e:
             print(f"[!] Could not write output file: {e}")

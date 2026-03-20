@@ -16,6 +16,9 @@ def run_command(args):
     success_count: int = 0
     fail_count: int = 0
     success_results: dict[str, str] = {}
+    print(
+        f"[*] Starting subdomain enumeration on target {args.target} (wordlist: {wordlist_path} | threads: {args.threads})"
+    )
     start = time.time()
     with ThreadPoolExecutor(max_workers=args.threads) as executor:
         futures = [
@@ -44,6 +47,7 @@ def run_command(args):
                 )
                 for url, ip in success_results.items():
                     f.write(f"{url}: {ip}\n")
+            print(f"[*] Output saved to {args.output}")
         except OSError as e:
             print(f"[!] Could not write output file: {e}")
 

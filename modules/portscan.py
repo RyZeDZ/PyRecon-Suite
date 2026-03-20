@@ -8,6 +8,9 @@ def run_command(args):
     ports = parse_ports(args.ports)
     open_ports = 0
     results = []
+    print(
+        f"[*] Starting TCP port scan on target {args.target} (threads: {args.threads} | ports: {args.ports})"
+    )
     start = time.time()
     with ThreadPoolExecutor(max_workers=args.threads) as executor:
         futures = [executor.submit(start_scan, args.target, port) for port in ports]
@@ -30,6 +33,7 @@ def run_command(args):
                 )
                 for port, banner in results:
                     f.write(f"{port}: {banner}\n")
+            print(f"[*] Output saved to {args.output}")
         except OSError as e:
             print(f"[!] Could not write output file: {e}")
 

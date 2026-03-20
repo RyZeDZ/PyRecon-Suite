@@ -25,6 +25,9 @@ def run_command(args):
         sys.exit(1)
     wordlist = load_wordlist(wordlist_path)
     success_results: dict[str, list[str]] = {}
+    print(
+        f"[*] Starting PHP Shell detection on target {args.target} (wordlist: {wordlist_path} | threads: {args.threads})"
+    )
     start = time.time()
     with ThreadPoolExecutor(max_workers=args.threads) as executor:
         futures = [executor.submit(check_url, args.target, word) for word in wordlist]
@@ -43,6 +46,7 @@ def run_command(args):
                 f.write(f"Time taken: {end - start:.2f}s\n\n\n")
                 for path, sigs in success_results.items():
                     f.write(f"{args.target}/{path}: {', '.join(sigs)}\n")
+            print(f"[*] Output saved to {args.output}")
         except OSError as e:
             print(f"[!] Could not write output file: {e}")
 
