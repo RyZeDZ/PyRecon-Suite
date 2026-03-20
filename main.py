@@ -27,7 +27,15 @@ def main():
     # ----- PHPSHELL
     phpshell_parser = subparsers.add_parser("phpshell", help="Execute phpshell scripts")
     phpshell_parser.add_argument("--target", help="Target URL", required=True)
+    phpshell_parser.add_argument("--wordlist", help="Wordlist to use", required=True)
     phpshell_parser.add_argument("-o", "--output", help="Output file")
+    phpshell_parser.add_argument(
+        "-t",
+        "--threads",
+        help="Number of threads to use, default 10",
+        type=int,
+        default=10,
+    )
     phpshell_parser.set_defaults(func=phpshell.run_command)
 
     # ----- PORTSCAN
