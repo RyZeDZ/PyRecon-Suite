@@ -1,4 +1,4 @@
-# Py-Recon Suite
+# PyRecon Suite
 
 A modular Python-based offensive reconnaissance toolkit for DNS enumeration, TCP port scanning, PHP shell detection, and HTTP security header analysis. Built for threat hunting and security assessments on systems you own or have explicit permission to test.
 
